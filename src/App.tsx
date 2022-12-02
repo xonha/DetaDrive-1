@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import LoginPage from "./features/Login/Login";
+import DashboardNav from "./features/Dashboard/DashboardNav";
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
+      <DashboardNav />
     </div>
   );
 }
