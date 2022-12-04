@@ -65,7 +65,7 @@ export default class DashboardManager {
 
   async patchSendToTrashFile(fileKey) {
     try {
-      const response = await apiServices.post(`/file/${fileKey}/send_to_trash`, 
+      const response = await apiServices.patch(`/file/${fileKey}/send_to_trash`, 
       {method: 'PATCH',
       headers: {
         Authorization: Auth
@@ -79,7 +79,7 @@ export default class DashboardManager {
 
   async patchRestoreFile(fileKey) {
     try {
-      const response = await apiServices.post(`/trash/${fileKey}`, 
+      const response = await apiServices.patch(`/trash/${fileKey}`, 
       {method: 'PATCH',
       headers: {
         Authorization: Auth}
@@ -92,7 +92,7 @@ export default class DashboardManager {
 
   async patchRenameFile(fileKey, name) {
     try {
-      const response = await apiServices.post(`/file/${fileKey}/rename`, 
+      const response = await apiServices.patch(`/file/${fileKey}/rename`, 
       {method: 'PATCH',
       body: JSON.stringify({name: name}),
       headers: {
@@ -124,7 +124,7 @@ export default class DashboardManager {
 
   async patchChangeOwner(fileKey, userKey) {
     try {
-      const response = await apiServices.post(`/file/${fileKey}/change_owner`, 
+      const response = await apiServices.patch(`/file/${fileKey}/change_owner`, 
       {method: 'PATCH',
       body: JSON.stringify({owner_key:userKey}), 
       headers: {
@@ -156,7 +156,7 @@ export default class DashboardManager {
 
   async deleteFile(fileKey) {
     try {
-      const response = await apiServices.post(`/trash/${fileKey}`, 
+      const response = await apiServices.delete(`/trash/${fileKey}`, 
       {method: 'DELETE',
       headers: {
         Authorization: Auth,
