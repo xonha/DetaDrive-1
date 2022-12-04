@@ -44,7 +44,7 @@ const LoginPage = () => {
         noValidate
         autoComplete="off"
       >
-        <Title style={{ padding: "0px 25px" }}>Login</Title>
+        <Title style={{ padding: "0px 25px", fontSize:'40px' }}>Login</Title>
         {error && (
           <Alert
             sx={{ margin: "15px" }}

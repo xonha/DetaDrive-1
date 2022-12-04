@@ -43,7 +43,7 @@ const SignUpPage = () => {
         noValidate
         autoComplete="off"
       >
-        <Title style={{ padding: "0px 25px" }}>Cadastro</Title>
+        <Title style={{ padding: "0px 25px", fontSize:'40px' }}>Cadastro</Title>
         {error && (
           <Alert
             sx={{ margin: "15px" }}
