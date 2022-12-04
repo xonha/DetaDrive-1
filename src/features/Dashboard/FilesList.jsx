@@ -7,7 +7,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
@@ -26,6 +25,7 @@ import Switch from '@mui/material/Switch';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
+import { Typography } from "@mui/material";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -43,7 +43,7 @@ export default function FilesList() {
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
-
+  const auth = `bearer ${localStorage.getItem("token")}`
 
   async function getFiles() {
     const res = await manager.getAllFiles();
@@ -120,9 +120,7 @@ getFiles()
       method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:
-               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzAxMjUzOTEsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.Pcj4Od1ugUkYAcR0-jyw-fpoYBJ1vJ0jKja3JYLVcGk",
-      },
+        Authorization: auth},
     })
     .then((res) => { return res.blob(); })
     .then((data) => {
@@ -135,7 +133,7 @@ getFiles()
 
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth:"95%"}}>
+    <Box sx={{ flexGrow: 1, maxWidth:"95%", height:'80vh'}}>
       <Grid item xs={12} md={6}>
         {shouldShowAlert &&(
 
@@ -158,7 +156,7 @@ getFiles()
         </div>:
         <Demo>
           <List>
-            {files &&
+            {files.length !== 0? 
               files.map((file) => {
                 return (
                   <div>
@@ -206,7 +204,10 @@ getFiles()
                   </ListItem>
                   </div>
                 );
-              })}
+              }):
+              <div style={{padding:'40px 0px', textAlign:'center'}}>
+            <Typography>Nenhum arquivo encontrado</Typography>
+            </div>}
           </List>
         </Demo>
 }
@@ -217,11 +218,13 @@ getFiles()
       <Button variant="contained" sx={{margin:'10px'}} onClick={()=>handleRenameFile()}>Renomear</Button>
     </Dialog>
     
-    <Dialog onClose={()=> setOpenShareModal(false)} open={openShareModal} >
-      <DialogTitle >Compartilhar Arquivo</DialogTitle>
-      <TextField id="standard-basic" label="Identificação do usuário" variant="standard" sx={{padding:'10px 20px',margin:'10px 0px'}} onChange={(event)=>setShareWithUserKey(event.target.value)}/>
-      <FormControlLabel control={<Switch defaultChecked />} label="Torna-lo dono do arquivo" sx={{margin:'10px 0px', padding:'0px 20px'}} onChange={(event)=>setMakeOwner(event.target.checked)}/>
+    <Dialog onClose={()=> setOpenShareModal(false)} open={openShareModal} sx={{textAlign:'center'}} >
+      <DialogTitle sx={{width:'300px'}} >Compartilhar Arquivo</DialogTitle>
+      <div style={{width: '300px', padding:'10px 20px'}}>
+      <TextField id="standard-basic" label="Identificação do usuário" variant="standard" onChange={(event)=>setShareWithUserKey(event.target.value)}/>
+      <FormControlLabel control={<Switch defaultValue={makeOwner} />} label="Torna-lo dono do arquivo" onChange={(event)=>setMakeOwner(event.target.checked)} sx={{padding:'20px 0px'}}/>
       <Button variant="contained" sx={{margin:'10px'}} onClick={()=>handleShareWith()}>Compartilhar</Button>
+      </div>
     </Dialog>
 
     </Box>

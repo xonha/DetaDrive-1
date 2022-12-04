@@ -83,7 +83,7 @@ export default function TrashScreen() {
 
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth:"95%"}}>
+    <Box sx={{ flexGrow: 1, maxWidth:"95%",  height:'80vh'}}>
       <Grid item xs={12} md={6}>
         {loading?
         <div style={{height:'90vh',display: 'flex', justifyContent: 'center', alignContent: 'center', flexWrap: 'wrap'}}>
@@ -147,7 +147,9 @@ export default function TrashScreen() {
               }
           </List>
           :
-          <Typography>Nenhum arquivo compartilhado</Typography>}
+          <div style={{padding:'40px 0px', textAlign:'center'}}>
+          <Typography>Nenhum arquivo encontrado</Typography>
+          </div>}
         </Demo>
         }
       </Grid>

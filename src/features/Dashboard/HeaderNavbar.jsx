@@ -9,12 +9,17 @@ import Dialog from '@mui/material/Dialog';
 import DashboardManager from "./service/DashboardManager";
 import { useDropzone } from 'react-dropzone'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Popper from '@mui/material/Popper';
+import { useNavigate } from "react-router-dom";
 
 export default function ButtonAppBar() {
   const [files, setFiles] = useState([]);
   const manager = new DashboardManager();
   const [openModal, setOpenModal] = useState(false)
   const [loading, setLoading] = useState(false)
+  const username = localStorage.getItem("username")
+  const [anchorEl, setAnchorEl] = useState(null);
+  let navigate = useNavigate();
 
 
   const uploadFiles = async () => {
@@ -33,6 +38,18 @@ export default function ButtonAppBar() {
       return setFiles(file)
     });
   })
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const handleLogout = () => {
+    localStorage.setItem("username",'')
+    localStorage.setItem("token",'')
+    navigate('/');
+
+  };
+  const open = Boolean(anchorEl);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -58,7 +75,12 @@ export default function ButtonAppBar() {
               </Button>
             </div>
             <div>
-              <Button color="inherit" sx={{textTransform:'none'}}>Olá, Camila!</Button>
+              <Button color="inherit" sx={{textTransform:'none'}} onClick={handleClick}>Olá, {username}!</Button>
+              <Popper open={open} anchorEl={anchorEl}>
+              <Box sx={{padding: '5px', bgcolor: 'background.paper' }}>
+                <Button onClick={handleLogout}>  Sair</Button> 
+              </Box>
+      </Popper>
             </div>
           </div>
         </Toolbar>
@@ -70,11 +92,11 @@ export default function ButtonAppBar() {
             <input {...getInputProps()} type="file"/>
             {
                 isDragActive ?
-                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10, margin:20 }}>Solte aqui o arquivo...</p> :
+                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10, margin:20, width:'200px' }}>Solte aqui o arquivo...</p> :
 
                 files.length!==0?
-                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20  }}>{files.name} </p>:
-                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20  }}>Arraste ou selecione um arquivo </p>
+                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px'  }}>{files.name} </p>:
+                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px'  }}>Arraste ou selecione um arquivo </p>
             }
         </div>
       <Button variant="contained" sx={{margin:'10px'}} onClick={() => uploadFiles()}>

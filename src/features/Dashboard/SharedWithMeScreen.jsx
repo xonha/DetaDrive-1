@@ -8,15 +8,10 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useEffect, useState } from "react";
 import DashboardManager from "./service/DashboardManager";
-import Popper from '@mui/material/Popper';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Paper from '@mui/material/Paper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Typography } from "@mui/material";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -25,8 +20,6 @@ const Demo = styled("div")(({ theme }) => ({
 export default function SharedWithMeScreen() {
   const manager = new DashboardManager();
   const [files, setFiles] = useState([]);
-  const [fileKey, setFileKey] = useState('');
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   async function getFiles() {
@@ -38,31 +31,6 @@ export default function SharedWithMeScreen() {
   useEffect(() => {
     getFiles();
   }, []);
-
-  function handleToggle (fileKey) {
-    setOpen((prevOpen) => !prevOpen);
-    setFileKey(fileKey)
-  };
-
-
-  const handleClose = (event) => {
-    setOpen(false);
-  };
-
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  }
-
-  async function handleSendToTrashFile(file) {
-    await manager.patchSendToTrashFile(file.key)
-    setLoading(true)
-    getFiles()
-  }
 
   async function handleDownload(file) {   
     fetch(`https://api.detadrive.tk/file/${file.key}/download`, {
@@ -84,7 +52,7 @@ export default function SharedWithMeScreen() {
 
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth:"95%"}}>
+    <Box sx={{ flexGrow: 1, maxWidth:"95%", height:'80vh'}}>
       <Grid item xs={12} md={6}>
       {loading?
         <div style={{height:'90vh',display: 'flex', justifyContent: 'center', alignContent: 'center', flexWrap: 'wrap'}}>
@@ -92,7 +60,7 @@ export default function SharedWithMeScreen() {
         </div>:
         <Demo>
           <List>
-            {files &&
+            {files.length!== 0 ?
               files.map((file) => {
                 return (
                   <div>
@@ -110,7 +78,11 @@ export default function SharedWithMeScreen() {
                   </ListItem>
                   </div>
                 );
-              })}
+              })
+            :
+            <div style={{padding:'40px 0px', textAlign:'center'}}>
+            <Typography>Nenhum arquivo encontrado</Typography>
+            </div>}
           </List>
         </Demo>
 }

@@ -1,6 +1,8 @@
 import {apiServices} from "./DashboardRepository";
 
-let Auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzAxMjUzOTEsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.Pcj4Od1ugUkYAcR0-jyw-fpoYBJ1vJ0jKja3JYLVcGk"
+function getAuth(){
+  return `bearer ${localStorage.getItem("token")}`
+}
 export default class DashboardManager {
   async postUploadFiles(files) {
     try {
@@ -8,7 +10,7 @@ export default class DashboardManager {
       {method: 'POST',
         body: files, 
       headers: {
-        Authorization: Auth
+        Authorization: getAuth()
       }
       });
       return response
@@ -23,10 +25,9 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization: Auth
+        Authorization: getAuth()
       }
       });
-      console.log(response)
       return response
     } catch (error) {
       return error;
@@ -39,7 +40,7 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:Auth
+        Authorization: getAuth()
       }
       });
       return response
@@ -54,7 +55,7 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization: Auth
+        Authorization: getAuth()
       }
       });
       return response
@@ -68,7 +69,7 @@ export default class DashboardManager {
       const response = await apiServices.patch(`/file/${fileKey}/send_to_trash`, 
       {method: 'PATCH',
       headers: {
-        Authorization: Auth
+        Authorization: getAuth()
       }
       });
       return response
@@ -82,7 +83,7 @@ export default class DashboardManager {
       const response = await apiServices.patch(`/trash/${fileKey}`, 
       {method: 'PATCH',
       headers: {
-        Authorization: Auth}
+        Authorization: getAuth()}
       });
       return response
     } catch (error) {
@@ -96,7 +97,7 @@ export default class DashboardManager {
       {method: 'PATCH',
       body: JSON.stringify({name: name}),
       headers: {
-        Authorization: Auth,
+        Authorization: getAuth(),
         'Accept': 'application/json',
         'Content-Type': 'application/json'}
       });
@@ -111,7 +112,7 @@ export default class DashboardManager {
       const response = await apiServices.post(`/file/${fileKey}/share ?share_with=${userKey}`, 
       {method: 'POST', 
       headers: {
-        Authorization: Auth,
+        Authorization: getAuth(),
         'Accept': 'application/json',
     'Content-Type': 'application/json'
       }
@@ -128,7 +129,7 @@ export default class DashboardManager {
       {method: 'PATCH',
       body: JSON.stringify({owner_key:userKey}), 
       headers: {
-        Authorization: Auth,
+        Authorization: getAuth(),
         'Accept': 'application/json',
     'Content-Type': 'application/json'
       }
@@ -145,7 +146,8 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:Auth
+        Authorization: getAuth()
+
       }
       });
       return response
@@ -159,7 +161,7 @@ export default class DashboardManager {
       const response = await apiServices.delete(`/trash/${fileKey}`, 
       {method: 'DELETE',
       headers: {
-        Authorization: Auth,
+        Authorization: getAuth(),
         'Accept': 'application/json',
     'Content-Type': 'application/json'
       }

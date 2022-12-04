@@ -1,4 +1,4 @@
-const urlApi: string = "https://api.detadrive.tk";
+const urlApi = "https://api.detadrive.tk";
 
 export const apiServices = {
   get: (route, header) =>
