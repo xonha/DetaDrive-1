@@ -66,7 +66,7 @@ export default function ButtonAppBar() {
             }}
           >
             <div>
-              <Typography variant="h6">FileTransfer</Typography>
+              <Typography variant="h6">DetaDrive</Typography>
             </div>
             <div>
               <Button color="inherit" onClick={() => setOpenModal(true)} sx={{textTransform:'none'}}>
@@ -78,9 +78,9 @@ export default function ButtonAppBar() {
               <Button color="inherit" sx={{textTransform:'none'}} onClick={handleClick}>Olá, {username}!</Button>
               <Popper open={open} anchorEl={anchorEl}>
               <Box sx={{padding: '5px', bgcolor: 'background.paper' }}>
-                <Button onClick={handleLogout}>  Sair</Button> 
+                <Button onClick={handleLogout}>Sair</Button> 
               </Box>
-      </Popper>
+        </Popper>
             </div>
           </div>
         </Toolbar>
@@ -95,8 +95,8 @@ export default function ButtonAppBar() {
                 <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10, margin:20, width:'200px' }}>Solte aqui o arquivo...</p> :
 
                 files.length!==0?
-                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px'  }}>{files.name} </p>:
-                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px'  }}>Arraste ou selecione um arquivo </p>
+                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px' }}>{files.name} </p>:
+                <p style={{ border: '1px solid gray', borderStyle: 'dotted', padding: 40, borderRadius: 10,  margin:20, width:'200px' }}>Arraste ou selecione um arquivo </p>
             }
         </div>
       <Button variant="contained" sx={{margin:'10px'}} onClick={() => uploadFiles()}>

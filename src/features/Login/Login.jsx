@@ -33,7 +33,7 @@ const LoginPage = () => {
   return (
     <>
       <div>
-        <LogoTitle>FileTransfer</LogoTitle>
+        <LogoTitle>DetaDrive</LogoTitle>
       </div>
       <Stack
         component="form"
