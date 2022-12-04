@@ -1,6 +1,6 @@
 import {apiServices} from "./DashboardRepository";
 
-
+let Auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzAxMjUzOTEsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.Pcj4Od1ugUkYAcR0-jyw-fpoYBJ1vJ0jKja3JYLVcGk"
 export default class DashboardManager {
   async postUploadFiles(files) {
     try {
@@ -8,8 +8,7 @@ export default class DashboardManager {
       {method: 'POST',
         body: files, 
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization: Auth
       }
       });
       return response
@@ -24,8 +23,7 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization: Auth
       }
       });
       console.log(response)
@@ -41,8 +39,7 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization:Auth
       }
       });
       return response
@@ -57,8 +54,7 @@ export default class DashboardManager {
       {method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization: Auth
       }
       });
       return response
@@ -72,8 +68,7 @@ export default class DashboardManager {
       const response = await apiServices.post(`/file/${fileKey}/send_to_trash`, 
       {method: 'PATCH',
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization: Auth
       }
       });
       return response
@@ -87,9 +82,7 @@ export default class DashboardManager {
       const response = await apiServices.post(`/trash/${fileKey}`, 
       {method: 'PATCH',
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
-      }
+        Authorization: Auth}
       });
       return response
     } catch (error) {
@@ -101,10 +94,26 @@ export default class DashboardManager {
     try {
       const response = await apiServices.post(`/file/${fileKey}/rename`, 
       {method: 'PATCH',
-      body: {name: 'teste'},
+      body: JSON.stringify({name: name}),
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk5NTk1MDcsInVzZXJuYW1lIjoiY2FtaWxhIiwicGFzc3dvcmQiOiIkMmIkMTIkZVFDRjNDUU5iT1FKU1Ric01qNU1kdU9jS0VHR1hxaXBGbDlRSm10YmdzbG9IbjloQkt5em0iLCJrZXkiOiIyNnpjNDdveGx6aWsifQ.87tT3UhM3cuWCW-XqJVw0wPr_yihDinBsutHQihPBDs",
+        Authorization: Auth,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'}
+      });
+      return response
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async postShareWith(fileKey, userKey) {
+    try {
+      const response = await apiServices.post(`/file/${fileKey}/share ?share_with=${userKey}`, 
+      {method: 'POST', 
+      headers: {
+        Authorization: Auth,
+        'Accept': 'application/json',
+    'Content-Type': 'application/json'
       }
       });
       return response
@@ -113,4 +122,51 @@ export default class DashboardManager {
     }
   }
 
+  async patchChangeOwner(fileKey, userKey) {
+    try {
+      const response = await apiServices.post(`/file/${fileKey}/change_owner`, 
+      {method: 'PATCH',
+      body: JSON.stringify({owner_key:userKey}), 
+      headers: {
+        Authorization: Auth,
+        'Accept': 'application/json',
+    'Content-Type': 'application/json'
+      }
+      });
+      return response
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getSharedWithMeFiles() {
+    try {
+      const response = await apiServices.get(`/file/shared`, 
+      {method: 'GET',
+      headers: {
+        'Content-Type': 'application/pdf',
+        Authorization:Auth
+      }
+      });
+      return response
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteFile(fileKey) {
+    try {
+      const response = await apiServices.post(`/trash/${fileKey}`, 
+      {method: 'DELETE',
+      headers: {
+        Authorization: Auth,
+        'Accept': 'application/json',
+    'Content-Type': 'application/json'
+      }
+      });
+      return response
+    } catch (error) {
+      return error;
+    }
+  }
 }
