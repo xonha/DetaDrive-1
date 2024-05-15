@@ -26,6 +26,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
 import { Typography } from "@mui/material";
+import { urlApi } from "../Login/service/LoginRepository";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -116,7 +117,7 @@ getFiles()
   }
 
   async function handleDownload(file) {   
-    fetch(`https://api.detadrive.tk/file/${file.key}/download`, {
+    fetch(`${urlApi}/file/${file.key}/download`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',

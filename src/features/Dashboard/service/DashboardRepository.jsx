@@ -1,4 +1,4 @@
-const urlApi = "https://api.detadrive.tk";
+import { urlApi } from "../../Login/service/LoginRepository";
 
 export const apiServices = {
   get: (route, header) =>
