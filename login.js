@@ -3,7 +3,6 @@ async function login() {
   const headers = {
     accept: "application/json",
     "Content-Type": "application/json",
-    "X-API-Key": "e09HopoZnGSg_RnQDjeM87SoG6JQ85Rd4NpiWdYLGpxod",
   };
 
   const body = JSON.stringify({
