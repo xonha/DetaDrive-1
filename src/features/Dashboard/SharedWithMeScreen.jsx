@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import DashboardManager from "./service/DashboardManager";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Typography } from "@mui/material";
+import { urlApi } from "../Login/service/LoginRepository";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -33,7 +34,7 @@ export default function SharedWithMeScreen() {
   }, []);
 
   async function handleDownload(file) {   
-    fetch(`https://api.detadrive.tk/file/${file.key}/download`, {
+    fetch(`${urlApi}/file/${file.key}/download`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/pdf',

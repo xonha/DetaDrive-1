@@ -1,4 +1,4 @@
-const urlApi = "https://api.detadrive.tk";
+export const urlApi = "https://api.detadrive.xonha.space";
 
 export const apiServices = {
   post: (route, fetchData) =>
