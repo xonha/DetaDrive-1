@@ -1,19 +1,33 @@
-import {apiServices} from "./DashboardRepository";
+import { apiServices } from "./DashboardRepository";
 
-function getAuth(){
-  return `bearer ${localStorage.getItem("token")}`
+function getAuth() {
+  return `bearer ${localStorage.getItem("token")}`;
 }
 export default class DashboardManager {
   async postUploadFiles(files) {
     try {
-      const response = await apiServices.post('/file', 
-      {method: 'POST',
-        body: files, 
-      headers: {
-        Authorization: getAuth()
-      }
+      const response = await apiServices.post("/file", {
+        method: "POST",
+        body: files,
+        headers: {
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getUsers() {
+    try {
+      const response = await apiServices.get("/user", {
+        method: "GET",
+        headers: {
+          Authorization: getAuth(),
+        },
+      });
+      return response;
     } catch (error) {
       return error;
     }
@@ -21,14 +35,14 @@ export default class DashboardManager {
 
   async getDownloadFile(fileKey) {
     try {
-      const response = await apiServices.get(`/file/${fileKey}/download`, 
-      {method: 'GET',
-      headers: {
-        'Content-Type': 'application/pdf',
-        Authorization: getAuth()
-      }
+      const response = await apiServices.get(`/file/${fileKey}/download`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -36,14 +50,14 @@ export default class DashboardManager {
 
   async getAllFiles() {
     try {
-      const response = await apiServices.get(`/file/owned`, 
-      {method: 'GET',
-      headers: {
-        'Content-Type': 'application/pdf',
-        Authorization: getAuth()
-      }
+      const response = await apiServices.get(`/file/owned`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -51,14 +65,14 @@ export default class DashboardManager {
 
   async getFilesOnTrash() {
     try {
-      const response = await apiServices.get(`/trash`, 
-      {method: 'GET',
-      headers: {
-        'Content-Type': 'application/pdf',
-        Authorization: getAuth()
-      }
+      const response = await apiServices.get(`/trash`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -66,13 +80,16 @@ export default class DashboardManager {
 
   async patchSendToTrashFile(fileKey) {
     try {
-      const response = await apiServices.patch(`/file/${fileKey}/send_to_trash`, 
-      {method: 'PATCH',
-      headers: {
-        Authorization: getAuth()
-      }
-      });
-      return response
+      const response = await apiServices.patch(
+        `/file/${fileKey}/send_to_trash`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: getAuth(),
+          },
+        },
+      );
+      return response;
     } catch (error) {
       return error;
     }
@@ -80,12 +97,13 @@ export default class DashboardManager {
 
   async patchRestoreFile(fileKey) {
     try {
-      const response = await apiServices.patch(`/trash/${fileKey}`, 
-      {method: 'PATCH',
-      headers: {
-        Authorization: getAuth()}
+      const response = await apiServices.patch(`/trash/${fileKey}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -93,15 +111,16 @@ export default class DashboardManager {
 
   async patchRenameFile(fileKey, name) {
     try {
-      const response = await apiServices.patch(`/file/${fileKey}/rename`, 
-      {method: 'PATCH',
-      body: JSON.stringify({name: name}),
-      headers: {
-        Authorization: getAuth(),
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'}
+      const response = await apiServices.patch(`/file/${fileKey}/rename`, {
+        method: "PATCH",
+        body: JSON.stringify({ name: name }),
+        headers: {
+          Authorization: getAuth(),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -109,15 +128,18 @@ export default class DashboardManager {
 
   async postShareWith(fileKey, userKey) {
     try {
-      const response = await apiServices.post(`/file/${fileKey}/share ?share_with=${userKey}`, 
-      {method: 'POST', 
-      headers: {
-        Authorization: getAuth(),
-        'Accept': 'application/json',
-    'Content-Type': 'application/json'
-      }
-      });
-      return response
+      const response = await apiServices.post(
+        `/file/${fileKey}/share ?share_with=${userKey}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: getAuth(),
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      return response;
     } catch (error) {
       return error;
     }
@@ -125,16 +147,19 @@ export default class DashboardManager {
 
   async patchChangeOwner(fileKey, userKey) {
     try {
-      const response = await apiServices.patch(`/file/${fileKey}/change_owner`, 
-      {method: 'PATCH',
-      body: JSON.stringify({owner_key:userKey}), 
-      headers: {
-        Authorization: getAuth(),
-        'Accept': 'application/json',
-    'Content-Type': 'application/json'
-      }
-      });
-      return response
+      const response = await apiServices.patch(
+        `/file/${fileKey}/change_owner`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({ owner_key: userKey }),
+          headers: {
+            Authorization: getAuth(),
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      return response;
     } catch (error) {
       return error;
     }
@@ -142,15 +167,14 @@ export default class DashboardManager {
 
   async getSharedWithMeFiles() {
     try {
-      const response = await apiServices.get(`/file/shared`, 
-      {method: 'GET',
-      headers: {
-        'Content-Type': 'application/pdf',
-        Authorization: getAuth()
-
-      }
+      const response = await apiServices.get(`/file/shared`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/pdf",
+          Authorization: getAuth(),
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
@@ -158,15 +182,15 @@ export default class DashboardManager {
 
   async deleteFile(fileKey) {
     try {
-      const response = await apiServices.delete(`/trash/${fileKey}`, 
-      {method: 'DELETE',
-      headers: {
-        Authorization: getAuth(),
-        'Accept': 'application/json',
-    'Content-Type': 'application/json'
-      }
+      const response = await apiServices.delete(`/trash/${fileKey}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: getAuth(),
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       });
-      return response
+      return response;
     } catch (error) {
       return error;
     }
