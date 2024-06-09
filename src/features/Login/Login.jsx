@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import { LogoTitle, Title } from "./Login.styled";
-import Stack from "@mui/material/Stack";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
+import CloseIcon from "@mui/icons-material/Close";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Button from "@mui/material/Button";
-import LoginManager from "./service/LoginManager";
-import Alert from "@mui/material/Alert";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
 import { Typography } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoadingBars } from "./LoadingBars";
+import { LogoTitle, Title } from "./Login.styled";
+import LoginManager from "./service/LoginManager";
 
-const LoginPage = () => {
+export default function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const manager = new LoginManager();
+  let navigate = useNavigate();
 
   async function handleLogin() {
+    setLoading(true);
     const res = await manager.postLogin(login, password);
     if (res.token) {
       localStorage.setItem("token", res.token);
@@ -29,7 +33,15 @@ const LoginPage = () => {
     } else {
       setError(true);
     }
+    setLoading(false);
   }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  }
+
   return (
     <>
       <div>
@@ -43,8 +55,9 @@ const LoginPage = () => {
         }}
         noValidate
         autoComplete="off"
+        onKeyDown={handleKeyDown}
       >
-        <Title style={{ padding: "0px 25px", fontSize:'40px' }}>Login</Title>
+        <Title style={{ padding: "0px 25px", fontSize: "40px" }}>Login</Title>
         {error && (
           <Alert
             sx={{ margin: "15px" }}
@@ -102,10 +115,9 @@ const LoginPage = () => {
           onClick={() => handleLogin()}
           sx={{ margin: "0px 25px" }}
         >
-          Login
+          {loading ? <LoadingBars fill="#fff" /> : "Login"}
         </Button>
         <Typography>
-          {" "}
           Não possui uma conta?
           <Button
             variant="text"
@@ -118,6 +130,4 @@ const LoginPage = () => {
       </Stack>
     </>
   );
-};
-
-export default LoginPage;
+}
