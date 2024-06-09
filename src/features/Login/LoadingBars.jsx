@@ -1,6 +1,4 @@
-export function LoadingBars(
-  props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
-) {
+export function LoadingBars(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
