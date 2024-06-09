@@ -289,8 +289,12 @@ export default function FilesList() {
           >
             {users.map((user) => (
               <List>
-                <ListItem>
-                  <ListItemText primary={user.username} secondary={user.key} />
+                <ListItem sx={{ cursor: "pointer" }}>
+                  <ListItemText
+                    primary={user.username}
+                    secondary={user.key}
+                    onClick={() => setShareWithUserKey(user.key)}
+                  />
                 </ListItem>
               </List>
             ))}
@@ -304,6 +308,7 @@ export default function FilesList() {
                 id="standard-basic"
                 label="Identificação do usuário"
                 variant="standard"
+                value={shareWithUserKey}
                 onChange={(event) => setShareWithUserKey(event.target.value)}
               />
               <FormControlLabel
